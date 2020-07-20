@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="assets/css/collapsible.css">
+
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/nativize.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/section.css">
+  <link rel="stylesheet" href="assets/css/demo.css">
+  <link rel="stylesheet" href="assets/css/github.css">
+
+</head>
+<body>
+
+  <nav class="nav js-nav">
+    <header class="nav-header">
+      <h1 class="nav-title"><strong>Catálogo</strong></h1>
+    </header>
+
+    <div class="nav-item u-category-windows">
+      <button onclick="toggle(1)" type="button" class="region">Região 1</button>
+      <button type="button" id="button-windows" data-section="windows" class="maker 1">Produtor 1</button> 
+      <button type="button" id="button-windows" data-section="windows" class="maker 1">Produtor 2</button> 
+      
+      <button onclick="toggle(2)" type="button" class="region">Região 2</button>
+      <button type="button" id="button-windows" data-section="windows" class="maker 2">Produtor 3</button> 
+      
+      <button onclick="toggle(3)" type="button" class="region">Região 3</button>
+      <button type="button" id="button-windows" data-section="windows" class="maker 3">Produtor 4</button> 
+      <button type="button" id="button-windows" data-section="windows" class="maker 3">Produtor 5</button> 
+      <button type="button" id="button-windows" data-section="windows" class="maker 3">Produtor 6</button> 
+      <button type="button" id="button-windows" data-section="windows" class="maker 3">Produtor 7</button> 
+      <button type="button" id="button-windows" data-section="windows" class="maker 3">Produtor 8</button> 
+    </div>
+  </nav>
+
+  <main class="content js-content"></main>
+
+  <script>
+    function toggle(id){
+      var menus = document.getElementsByClassName("maker " + id);
+      for(var i=0; i<menus.length; i++){
+        if(menus[i].style.display == "block"){
+          menus[i].style.display = "none";
+        }
+        else{
+          menus[i].style.display = "block";
+        }
+      }
+    }
+
+    require('./assets/imports')
+    require('./assets/ex-links')
+    require('./assets/nav')
+    require('./assets/demo-btns')
+    require('./assets/code-blocks')
+    require('./assets/normalize-shortcuts')
+  </script>
+</body>
+</html>

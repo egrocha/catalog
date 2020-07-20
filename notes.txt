@@ -1,0 +1,2 @@
+#Deploy to windows:
+electron-packager . Catálogo --platform=win32 --arch=x64

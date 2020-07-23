@@ -57,7 +57,9 @@
     cursor: default;
     outline: none;
 }
-.maker:hover,
+.maker:active, .maker:hover {
+  background-color: rgb(197, 253, 151);
+}
 .maker:focus:not(.is-selected) {
   background-color: hsla(0,0%,0%,.1);
 }
@@ -65,8 +67,8 @@
   background-color: var(--color-accent);
 }
 
-.wine {
-    display: block;
+.wine{
+    display: none;
     width: 100%;
     padding: .3rem;
     padding-left: calc(4rem + 16px + .5rem);;
@@ -80,7 +82,7 @@
     cursor: default;
     outline: none;
 }
-.active, .region:hover {
+.wine:active, .wine:hover {
   background-color: rgb(197, 253, 151);
 }
 .content {

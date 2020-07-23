@@ -13,17 +13,18 @@
         <h1 class="nav-title"><strong>Catálogo</strong></h1>
       </header>
 
-      <div class="nav-item u-category-windows">
+      <div id="region-div">
+        <!--
         <button onclick="toggle(1)" type="button" class="region 1">Região 1</button>
         
-        <button onclick="subtoggle(1, 1)" type="button" class="maker 1">Produtor 1</button> 
+        <button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button> 
         
-        <button onclick="toggleImage(1, 1)" type="button" class="wine 1">Vinho 1</button>
+        <button onclick="toggleImage(1)" type="button" class="wine 1">Vinho 1</button>
         
-        <button onclick="subtoggle(1, 2)" type="button" class="maker 1">Produtor 2</button> 
+        <button onclick="subtoggle(2)" type="button" class="maker 1">Produtor 2</button> 
 
         <button onclick="toggleImage(2)" type="button" class="wine 2">Vinho 2</button>
-        
+        -->
       </div>
     </nav>
   </div>
@@ -35,6 +36,67 @@
   <main class="content js-content"></main>
 
   <script>
+
+		var data = new Map();
+		data.set(1, {
+			"name": "Região 1",
+			"children":{
+				1: {
+					"name": "Produtor 1",
+					"children": {
+						1: {"name": "Vinho 1"},
+						2: {"name": "Vinho 2"}
+					}
+				},
+				2: {
+					"name": "Produtor 2",
+					"children":{
+						1: {"name": "Vinho 3"}
+					}
+				}
+			}
+		});
+
+		data.set(2, {
+				"name": "Região 2",
+				"children":{
+					2: {
+						"name": "Produtor 2",
+						"children":{
+							3: {"name": "Vinho 3"}
+						}
+					}
+				}
+		});
+
+    var tags = ['<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>', 
+    '<button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button>', 
+    '<button onclick="toggleImage(1)" type="button" class="wine 1">Vinho 1</button>',
+    '<button onclick="subtoggle(2)" type="button" class="maker 1">Produtor 2</button>',
+    '<button onclick="toggleImage(2)" type="button" class="wine 2">Vinho 2</button>']
+
+    function setTags(){
+			var regionDiv = document.getElementById('region-div');
+			var tag;
+			//TODO: GET KEYS FROM MAP INSTEAD OF ITERATING WITH A COUNTER
+      for(var key = 1; key <= data.size; key++){
+				tag = '<button onclick=\"toggle('+key+')\" type=\"button\" class=\"region '+key+'\">'+data.get(key).name+'</button>';
+				regionDiv.insertAdjacentHTML( 'beforeend', tag);
+				//<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>
+      }
+		}
+		
+    function setTags2(){
+      var regions = document.getElementById('region-div');
+      for(var i = 0; i < tags.length; i++){
+        regions.insertAdjacentHTML( 'beforeend', tags[i]);
+      }
+    }
+
+    window.onload = function(){
+      setTags();
+    }
+
     var regionMap = new Map()
     var imageMap = new Map()
 
@@ -50,8 +112,8 @@
       }
     }
 
-    function subtoggle(parent, id){
-      var menus = document.getElementsByClassName("maker " + id);
+    function subtoggle(id){
+      var menus = document.getElementsByClassName("wine " + id);
       for(var i=0; i<menus.length; i++){
         if(menus[i].style.display == "block"){
           menus[i].style.display = "none";

@@ -5,45 +5,39 @@
 
   <link rel="stylesheet" href="assets/css/collapsible.css">
 
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/nativize.css">
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/about.css">
-  <link rel="stylesheet" href="assets/css/nav.css">
-  <link rel="stylesheet" href="assets/css/section.css">
-  <link rel="stylesheet" href="assets/css/demo.css">
-  <link rel="stylesheet" href="assets/css/github.css">
-
-  <link rel="import" href="sections/wine.html">
-
 </head>
 <body>
+  <div class="vertical-menu">
+    <nav class="nav js-nav">
+      <header class="nav-header">
+        <h1 class="nav-title"><strong>Catálogo</strong></h1>
+      </header>
 
-  <nav class="nav js-nav">
-    <header class="nav-header">
-      <h1 class="nav-title"><strong>Catálogo</strong></h1>
-    </header>
+      <div class="nav-item u-category-windows">
+        <button onclick="toggle(1)" type="button" class="region 1">Região 1</button>
+        
+        <button onclick="subtoggle(1, 1)" type="button" class="maker 1">Produtor 1</button> 
+        
+        <button onclick="toggleImage(1, 1)" type="button" class="wine 1">Vinho 1</button>
+        
+        <button onclick="subtoggle(1, 2)" type="button" class="maker 1">Produtor 2</button> 
 
-    <div class="nav-item u-category-windows">
-      <button onclick="toggle(1)" type="button" class="region">Região 1</button>
-      <button type="button" id="button-windows" data-section="wine" class="maker 1">Produtor 1</button> 
-      <button type="button" id="button-windows" data-section="wine" class="maker 1">Produtor 2</button> 
-      
-      <button onclick="toggle(2)" type="button" class="region">Região 2</button>
-      <button type="button" id="button-windows" data-section="wine" class="maker 2">Produtor 3</button> 
-      
-      <button onclick="toggle(3)" type="button" class="region">Região 3</button>
-      <button type="button" id="button-windows" data-section="wine" class="maker 3">Produtor 4</button> 
-      <button type="button" id="button-windows" data-section="wine" class="maker 3">Produtor 5</button> 
-      <button type="button" id="button-windows" data-section="wine" class="maker 3">Produtor 6</button> 
-      <button type="button" id="button-windows" data-section="wine" class="maker 3">Produtor 7</button> 
-      <button type="button" id="button-windows" data-section="wine" class="maker 3">Produtor 8</button> 
-    </div>
-  </nav>
+        <button onclick="toggleImage(2)" type="button" class="wine 2">Vinho 2</button>
+        
+      </div>
+    </nav>
+  </div>
+
+  <div class="right-content">
+    Teste
+  </div>
 
   <main class="content js-content"></main>
 
   <script>
+    var regionMap = new Map()
+    var imageMap = new Map()
+
     function toggle(id){
       var menus = document.getElementsByClassName("maker " + id);
       for(var i=0; i<menus.length; i++){
@@ -56,12 +50,17 @@
       }
     }
 
-    require('./assets/imports')
-    require('./assets/ex-links')
-    require('./assets/nav')
-    require('./assets/demo-btns')
-    require('./assets/code-blocks')
-    require('./assets/normalize-shortcuts')
+    function subtoggle(parent, id){
+      var menus = document.getElementsByClassName("maker " + id);
+      for(var i=0; i<menus.length; i++){
+        if(menus[i].style.display == "block"){
+          menus[i].style.display = "none";
+        }
+        else{
+          menus[i].style.display = "block";
+        }
+      }
+    }
   </script>
 </body>
 </html>

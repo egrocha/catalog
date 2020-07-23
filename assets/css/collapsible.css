@@ -1,3 +1,47 @@
+.vertical-menu{
+  position:fixed;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  margin: 0;
+  float: left;
+  width: 33%;
+  background-color: rgba(245, 245, 245, 0.877);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.right-content{
+  float: right;
+  justify-content: center;
+}
+
+.region {
+    display: block;
+    width: 100%;
+    padding: .3rem;
+    padding-left: 2rem;
+    line-height: 2;
+    text-align: left;
+    font: inherit;
+    font-size: 13px;
+    color: inherit;
+    border: none;
+    background-color: transparent;
+    cursor: default;
+    outline: none;
+}
+.active, .region:hover {
+  background-color: rgb(197, 253, 151);
+}
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
 .maker{
     display: none;
     width: 100%;
@@ -20,38 +64,12 @@
 .maker.is-selected {
   background-color: var(--color-accent);
 }
-.region {
-    display: block;
-    width: 100%;
-    padding: .3rem;
-    padding-left: 2rem;
-    line-height: 2;
-    text-align: left;
-    font: inherit;
-    font-size: 13px;
-    color: inherit;
-    border: none;
-    background-color: transparent;
-    cursor: default;
-    outline: none;
-  }
-  
-  .active, .region:hover {
-    background-color: rgb(197, 253, 151);
-  }
-  
-  .content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
 
-  .nav-button-2 {
+.wine {
     display: block;
     width: 100%;
     padding: .3rem;
-    padding-left: calc(2rem + 16px + .5rem); /* padding + icon + magic */
+    padding-left: calc(4rem + 16px + .5rem);;
     line-height: 2;
     text-align: left;
     font: inherit;
@@ -61,4 +79,31 @@
     background-color: transparent;
     cursor: default;
     outline: none;
-  }
+}
+.active, .region:hover {
+  background-color: rgb(197, 253, 151);
+}
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
+.nav-button-2 {
+  display: block;
+  width: 100%;
+  padding: .3rem;
+  padding-left: calc(2rem + 16px + .5rem); /* padding + icon + magic */
+  line-height: 2;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  color: inherit;
+  border: none;
+  background-color: transparent;
+  cursor: default;
+  outline: none;
+}
+

@@ -36,38 +36,40 @@
   <main class="content js-content"></main>
 
   <script>
-
 		var data = new Map();
-		data.set(1, {
-			"name": "Região 1",
-			"children":{
-				1: {
-					"name": "Produtor 1",
-					"children": {
-						1: {"name": "Vinho 1"},
-						2: {"name": "Vinho 2"}
-					}
-				},
-				2: {
-					"name": "Produtor 2",
-					"children":{
-						1: {"name": "Vinho 3"}
-					}
-				}
-			}
-		});
 
-		data.set(2, {
-				"name": "Região 2",
-				"children":{
-					2: {
-						"name": "Produtor 2",
-						"children":{
-							3: {"name": "Vinho 3"}
-						}
-					}
-				}
-		});
+    function populateMap(){
+		  data.set(1, {
+		  	"name": "Região 1",
+		  	"children":{
+		  		1: {
+		  			"name": "Produtor 1",
+		  			"children": {
+		  				1: {"name": "Vinho 1"},
+		  				2: {"name": "Vinho 2"}
+		  			}
+		  		},
+		  		2: {
+		  			"name": "Produtor 2",
+		  			"children":{
+		  				3: {"name": "Vinho 3"}
+		  			}
+		  		}
+		  	}
+		  });
+
+		  data.set(2, {
+		  	"name": "Região 2",
+		  	"children":{
+		  		3: {
+		  			"name": "Produtor 3",
+		  			"children":{
+		  				4: {"name": "Vinho 4"}
+		  			}
+		  		}
+		  	}
+		  });
+    }
 
     var tags = ['<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>', 
     '<button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button>', 
@@ -78,10 +80,17 @@
     function setTags(){
 			var regionDiv = document.getElementById('region-div');
 			var tag;
+      var children;
 			//TODO: GET KEYS FROM MAP INSTEAD OF ITERATING WITH A COUNTER
-      for(var key = 1; key <= data.size; key++){
+      //for(var key = 1; key <= data.size; key++){
+      for(var [key, value] of data.entries()){
 				tag = '<button onclick=\"toggle('+key+')\" type=\"button\" class=\"region '+key+'\">'+data.get(key).name+'</button>';
 				regionDiv.insertAdjacentHTML( 'beforeend', tag);
+        children = value.children;
+        for(var [key2, value2] of Object.entries(children)){
+          console.log(key2)
+          console.log(value2)
+        }
 				//<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>
       }
 		}
@@ -94,6 +103,7 @@
     }
 
     window.onload = function(){
+      populateMap();
       setTags();
     }
 

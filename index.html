@@ -10,7 +10,7 @@
   <div class="vertical-menu">
     <nav class="nav js-nav">
       <header class="nav-header">
-        <h1 class="nav-title"><strong>Catálogo</strong></h1>
+        <h1 class="nav-title"><strong>CATÁLOGO</strong></h1>
       </header>
 
       <div id="region-div">
@@ -30,7 +30,7 @@
   </div>
 
   <div class="right-content">
-    Teste
+    <img src="" id="item-image" class="item-image">
   </div>
 
   <main class="content js-content"></main>
@@ -45,14 +45,14 @@
 		  		1: {
 		  			"name": "Produtor 1",
 		  			"children": {
-		  				1: {"name": "Vinho 1"},
-		  				2: {"name": "Vinho 2"}
+		  				1: {"name": "Vinho 1", "src": "wine1.jpg"},
+		  				2: {"name": "Vinho 2", "src": "wine1.jpg"}
 		  			}
 		  		},
 		  		2: {
 		  			"name": "Produtor 2",
 		  			"children":{
-		  				3: {"name": "Vinho 3"}
+		  				3: {"name": "Vinho 3", "src": "wine1.jpg"}
 		  			}
 		  		}
 		  	}
@@ -64,7 +64,7 @@
 		  		3: {
 		  			"name": "Produtor 3",
 		  			"children":{
-		  				4: {"name": "Vinho 4"}
+		  				4: {"name": "Vinho 4", "src": "wine1.jpg"}
 		  			}
 		  		}
 		  	}
@@ -84,14 +84,20 @@
 			//TODO: GET KEYS FROM MAP INSTEAD OF ITERATING WITH A COUNTER
       //for(var key = 1; key <= data.size; key++){
       for(var [key, value] of data.entries()){
-				tag = '<button onclick=\"toggle('+key+')\" type=\"button\" class=\"region '+key+'\">'+data.get(key).name+'</button>';
+				tag = '<button onclick=\"toggle('+key+')\" id=\''+value.name+'\' type=\"button\" class=\"region '+key+'\">'+value.name+'</button>';
 				regionDiv.insertAdjacentHTML( 'beforeend', tag);
         children = value.children;
         for(var [key2, value2] of Object.entries(children)){
-          console.log(key2)
-          console.log(value2)
+          tag = '<button onclick=\"subtoggle('+key+','+key2+')\" id=\''+value2.name+'\' type=\"button\" class=\"maker '+key+'\">'+value2.name+'</button>';
+          regionDiv.insertAdjacentHTML( 'beforeend', tag);
+          children = value2.children;
+          for(var [key3, value3] of Object.entries(children)){
+            //the apostrophes around value3.src are necessary to add strings to onclick
+            tag = '<button onclick=\"toggleImage(\''+value3.src+'\')\" id=\''+value3.name+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3.name+'</button>';
+            regionDiv.insertAdjacentHTML( 'beforeend', tag);
+          }
         }
-				//<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>
+				//<button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button>
       }
 		}
 		
@@ -111,27 +117,56 @@
     var imageMap = new Map()
 
     function toggle(id){
-      var menus = document.getElementsByClassName("maker " + id);
-      for(var i=0; i<menus.length; i++){
-        if(menus[i].style.display == "block"){
-          menus[i].style.display = "none";
-        }
-        else{
-          menus[i].style.display = "block";
+      var button;
+      for(var [key, value] of data.entries()){
+        if (id == key) {
+          children = value.children;
+          for(var [key2, value2] of Object.entries(children)){
+            button = document.getElementById(value2.name)
+            if(button.style.display == "block"){
+              button.style.display = "none";
+            }
+            else{
+              button.style.display = "block";
+            }
+            children = value2.children;
+            for(var [key3, value3] of Object.entries(children)){
+              button = document.getElementById(value3.name)
+              if(button.style.display == "block"){
+                button.style.display = "none";
+              }
+            }
+          }
         }
       }
     }
 
-    function subtoggle(id){
-      var menus = document.getElementsByClassName("wine " + id);
-      for(var i=0; i<menus.length; i++){
-        if(menus[i].style.display == "block"){
-          menus[i].style.display = "none";
-        }
-        else{
-          menus[i].style.display = "block";
+    function subtoggle(id, id2){
+      var button;
+      for(var [key, value] of data.entries()){
+        if (id == key) {
+          children = value.children;
+          for(var [key2, value2] of Object.entries(children)){
+            if (id2 == key2) {
+              children = value2.children;
+              for(var [key3, value3] of Object.entries(children)){
+                button = document.getElementById(value3.name)
+                if(button.style.display == "block"){
+                  button.style.display = "none";
+                }
+                else{
+                  button.style.display = "block";
+                }
+              }
+            }
+          }
         }
       }
+    }
+
+    function toggleImage(src){
+      var image = document.getElementById("item-image");
+      image.src = 'assets/images/' + src;
     }
   </script>
 </body>

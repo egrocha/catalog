@@ -36,53 +36,12 @@
   <main class="content js-content"></main>
 
   <script>
-		var data = new Map();
-
-    function populateMap(){
-		  data.set(1, {
-		  	"name": "Região 1",
-		  	"children":{
-		  		1: {
-		  			"name": "Produtor 1",
-		  			"children": {
-		  				1: {"name": "Vinho 1", "src": "wine1.jpg"},
-		  				2: {"name": "Vinho 2", "src": "wine1.jpg"}
-		  			}
-		  		},
-		  		2: {
-		  			"name": "Produtor 2",
-		  			"children":{
-		  				3: {"name": "Vinho 3", "src": "wine1.jpg"}
-		  			}
-		  		}
-		  	}
-		  });
-
-		  data.set(2, {
-		  	"name": "Região 2",
-		  	"children":{
-		  		3: {
-		  			"name": "Produtor 3",
-		  			"children":{
-		  				4: {"name": "Vinho 4", "src": "wine1.jpg"}
-		  			}
-		  		}
-		  	}
-		  });
-    }
-
-    var tags = ['<button onclick="toggle(1)" type="button" class="region 1">Região 1</button>', 
-    '<button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button>', 
-    '<button onclick="toggleImage(1)" type="button" class="wine 1">Vinho 1</button>',
-    '<button onclick="subtoggle(2)" type="button" class="maker 1">Produtor 2</button>',
-    '<button onclick="toggleImage(2)" type="button" class="wine 2">Vinho 2</button>']
+    var data = new Map(Object.entries(require('./data.json')))
 
     function setTags(){
 			var regionDiv = document.getElementById('region-div');
 			var tag;
       var children;
-			//TODO: GET KEYS FROM MAP INSTEAD OF ITERATING WITH A COUNTER
-      //for(var key = 1; key <= data.size; key++){
       for(var [key, value] of data.entries()){
 				tag = '<button onclick=\"toggle('+key+')\" id=\''+value.name+'\' type=\"button\" class=\"region '+key+'\">'+value.name+'</button>';
 				regionDiv.insertAdjacentHTML( 'beforeend', tag);
@@ -97,7 +56,6 @@
             regionDiv.insertAdjacentHTML( 'beforeend', tag);
           }
         }
-				//<button onclick="subtoggle(1)" type="button" class="maker 1">Produtor 1</button>
       }
 		}
 		
@@ -109,7 +67,7 @@
     }
 
     window.onload = function(){
-      populateMap();
+      //populateMap();
       setTags();
     }
 

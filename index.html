@@ -43,16 +43,16 @@
 			var tag;
       var children;
       for(var [key, value] of data.entries()){
-				tag = '<button onclick=\"toggle('+key+')\" id=\''+value.name+'\' type=\"button\" class=\"region '+key+'\">'+value.name+'</button>';
+				tag = '<button onclick=\"toggle('+key+')\" id=\'region'+key+'\' type=\"button\" class=\"region '+key+'\">'+value.name+'</button>';
 				regionDiv.insertAdjacentHTML( 'beforeend', tag);
         children = value.children;
         for(var [key2, value2] of Object.entries(children)){
-          tag = '<button onclick=\"subtoggle('+key+','+key2+')\" id=\''+value2.name+'\' type=\"button\" class=\"maker '+key+'\">'+value2.name+'</button>';
+          tag = '<button onclick=\"subtoggle('+key+','+key2+')\" id=\'maker'+key2+'\' type=\"button\" class=\"maker '+key+'\">'+value2.name+'</button>';
           regionDiv.insertAdjacentHTML( 'beforeend', tag);
           children = value2.children;
           for(var [key3, value3] of Object.entries(children)){
             //the apostrophes around value3.src are necessary to add strings to onclick
-            tag = '<button onclick=\"toggleImage(\''+value3.src+'\')\" id=\''+value3.name+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3.name+'</button>';
+            tag = '<button onclick=\"toggleImage(\''+value3.src+'\')\" id=\'item'+key3+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3.name+'</button>';
             regionDiv.insertAdjacentHTML( 'beforeend', tag);
           }
         }
@@ -79,8 +79,9 @@
       for(var [key, value] of data.entries()){
         if (id == key) {
           children = value.children;
+          console.log(children)
           for(var [key2, value2] of Object.entries(children)){
-            button = document.getElementById(value2.name)
+            button = document.getElementById('maker'+key2)
             if(button.style.display == "block"){
               button.style.display = "none";
             }
@@ -89,7 +90,7 @@
             }
             children = value2.children;
             for(var [key3, value3] of Object.entries(children)){
-              button = document.getElementById(value3.name)
+              button = document.getElementById('item'+key3)
               if(button.style.display == "block"){
                 button.style.display = "none";
               }
@@ -108,7 +109,7 @@
             if (id2 == key2) {
               children = value2.children;
               for(var [key3, value3] of Object.entries(children)){
-                button = document.getElementById(value3.name)
+                button = document.getElementById('item'+key3)
                 if(button.style.display == "block"){
                   button.style.display = "none";
                 }
@@ -124,7 +125,7 @@
 
     function toggleImage(src){
       var image = document.getElementById("item-image");
-      image.src = 'assets/images/' + src;
+      image.src = 'Cena de Vinhos/' + src;
     }
   </script>
 </body>

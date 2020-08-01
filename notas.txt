@@ -1,0 +1,6 @@
+Deploy to windows:
+electron-packager . Catálogo --platform=win32 --arch=x64
+
+regions: 17
+makers: 93
+items: 243

@@ -38,37 +38,59 @@
   <script>
     var data = new Map(Object.entries(require('./data.json')))
 
+    window.onload = function(){
+      addKeys();
+      setTags();
+    }
+
+    function addKeys(){
+      var key = 0;
+      var key2 = 0;
+      var key3 = 0;
+      var children;
+
+      for(var value of data.entries()){
+        value[1].key = key;
+        children = value[1].children;
+        for(var value2 of Object.entries(children)){
+          value2[1].key = key2;
+          children = value2[1].children;
+          for(var value3 of Object.entries(children)){
+            value3[1].key = key3;
+            key3++;
+          }
+          key2++;
+        }
+        key++;
+      }
+    }
+		
     function setTags(){
 			var regionDiv = document.getElementById('region-div');
 			var tag;
       var children;
-      for(var [key, value] of data.entries()){
-				tag = '<button onclick=\"toggle('+key+')\" id=\'region'+key+'\' type=\"button\" class=\"region '+key+'\">'+value.name+'</button>';
-				regionDiv.insertAdjacentHTML( 'beforeend', tag);
-        children = value.children;
-        for(var [key2, value2] of Object.entries(children)){
-          tag = '<button onclick=\"subtoggle('+key+','+key2+')\" id=\'maker'+key2+'\' type=\"button\" class=\"maker '+key+'\">'+value2.name+'</button>';
+      var key, key2, key3;
+
+      for(var value of data.entries()){
+        key = value[1].key; 
+				tag = '<button onclick=\"toggle('+key+')\" id=\'region'+key+'\' type=\"button\" class=\"region '+key+'\">'+value[1].name+'</button>';
+        regionDiv.insertAdjacentHTML('beforeend', tag);
+
+        children = value[1].children;
+        for(var value2 of Object.entries(children)){
+          key2 = value2[1].key;
+          tag = '<button onclick=\"subtoggle('+key+','+key2+')\" id=\'maker'+key2+'\' type=\"button\" class=\"maker '+key+'\">'+value2[1].name+'</button>';
           regionDiv.insertAdjacentHTML( 'beforeend', tag);
-          children = value2.children;
-          for(var [key3, value3] of Object.entries(children)){
+
+          children = value2[1].children;
+          for(var value3 of Object.entries(children)){
+            key3 = value3[1].key;
             //the apostrophes around value3.src are necessary to add strings to onclick
-            tag = '<button onclick=\"toggleImage(\''+value3.src+'\')\" id=\'item'+key3+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3.name+'</button>';
+            tag = '<button onclick=\"toggleImage(\''+value3[1].src+'\')\" id=\'item'+key3+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3[1].name+'</button>';
             regionDiv.insertAdjacentHTML( 'beforeend', tag);
           }
         }
       }
-		}
-		
-    function setTags2(){
-      var regions = document.getElementById('region-div');
-      for(var i = 0; i < tags.length; i++){
-        regions.insertAdjacentHTML( 'beforeend', tags[i]);
-      }
-    }
-
-    window.onload = function(){
-      //populateMap();
-      setTags();
     }
 
     var regionMap = new Map()
@@ -76,11 +98,13 @@
 
     function toggle(id){
       var button;
-      for(var [key, value] of data.entries()){
+      var key, key2, key3;
+      for(var value of data.entries()){
+        key = value[1].key;
         if (id == key) {
-          children = value.children;
-          console.log(children)
-          for(var [key2, value2] of Object.entries(children)){
+          children = value[1].children;
+          for(var value2 of Object.entries(children)){
+            key2 = value2[1].key;
             button = document.getElementById('maker'+key2)
             if(button.style.display == "block"){
               button.style.display = "none";
@@ -88,8 +112,9 @@
             else{
               button.style.display = "block";
             }
-            children = value2.children;
-            for(var [key3, value3] of Object.entries(children)){
+            children = value2[1].children;
+            for(var value3 of Object.entries(children)){
+              key3 = value3[1].key;
               button = document.getElementById('item'+key3)
               if(button.style.display == "block"){
                 button.style.display = "none";
@@ -102,13 +127,17 @@
 
     function subtoggle(id, id2){
       var button;
-      for(var [key, value] of data.entries()){
+      var key, key2, key3;
+      for(var value of data.entries()){
+        key = value[1].key;
         if (id == key) {
-          children = value.children;
-          for(var [key2, value2] of Object.entries(children)){
+          children = value[1].children;
+          for(var value2 of Object.entries(children)){
+            key2 = value2[1].key;
             if (id2 == key2) {
-              children = value2.children;
-              for(var [key3, value3] of Object.entries(children)){
+              children = value2[1].children;
+              for(var value3 of Object.entries(children)){
+                key3 = value3[1].key;
                 button = document.getElementById('item'+key3)
                 if(button.style.display == "block"){
                   button.style.display = "none";

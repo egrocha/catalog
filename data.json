@@ -294,12 +294,42 @@
                 "name": "Holminhos",
                 "children": [
                     {
-                        "name": "Azeite Virgem Extra 2L",
+                        "name": "Azeite Virgem Extra 500ml",
+                        "src": "Azeite e Enchidos/Holminhos/5l.jpeg"
+                    },
+                    {
+                        "name": "Azeite Virgem Extra 2l",
                         "src": "Azeite e Enchidos/Holminhos/2l.jpeg"
                     },
                     {
-                        "name": "Azeite Virgem Extra 5L",
+                        "name": "Azeite Virgem Extra 5l",
                         "src": "Azeite e Enchidos/Holminhos/5l.jpeg"
+                    }
+                ]
+            },
+            {
+                "name": "Prazeres da Terra",
+                "children": [
+                    {
+                        "name": "Covilhetes",
+                        "src": "Azeite e Enchidos/Prazeres da Terra/covilhetes.jpg"
+                    },
+                    {
+                        "name": "Pasteis de Chaves",
+                        "src": "Azeite e Enchidos/Prazeres da Terra/pasteis de chaves.jpg"
+                    }
+                ]
+            },
+            {
+                "name": "Prime Grape",
+                "children": [
+                    {
+                        "name": "Casa Boal 500ml",
+                        "src": "Azeite e Enchidos/Prime Grape/casa boal 500ml.jpeg"
+                    },
+                    {
+                        "name": "Curvas de Murça",
+                        "src": "Azeite e Enchidos/Prime Grape/curvas de murca 750ml.jpeg"
                     }
                 ]
             },
@@ -337,6 +367,14 @@
                     {
                         "name": "Plumas",
                         "src": "Azeite e Enchidos/Varanegra/plumas.jpg"
+                    },
+                    {
+                        "name": "Presunto Bloco",
+                        "src": "Azeite e Enchidos/Varanegra/presunto bloco.jpeg"
+                    },
+                    {
+                        "name": "Presunto Inteiro",
+                        "src": "Azeite e Enchidos/Varanegra/presunto inteiro.jpeg"
                     }
                 ]
             }

@@ -22,15 +22,19 @@
   <div class="right-content">
     <img src="" id="item-image" class="item-image">
     
-    
-    <button>Teste</button>
+    <br/>
+
+    <div id="centered" class="centered">
+      <button onclick="openPDF()">Teste</button>
+    </div>
     
   </div>
 
   <main class="content js-content"></main>
 
   <script>
-    var data = new Map(Object.entries(require('./data.json')))
+    var data = new Map(Object.entries(require('./data.json')));
+    var pdf = "";
 
     window.onload = function(){
       addKeys();
@@ -138,6 +142,13 @@
                 }
                 else{
                   button.style.display = "block";
+                  try{
+                    //TODO: adicionar pdfs ao ficheiro json
+                    pdf = value3[1].pdf;
+                  }
+                  catch{
+                    pdf = "";
+                  }
                 }
               }
             }
@@ -147,8 +158,22 @@
     }
 
     function toggleImage(src){
+      var div = document.getElementById("centered");
+      div.style.display = "block";
+      console.log(div.style.visibility)
       var image = document.getElementById("item-image");
       image.src = 'Cena de Vinhos/' + src;
+    }
+
+    function openPDF(){
+      const remote = require('electron').remote;
+      const BrowserWindow = remote.BrowserWindow;
+      const win = new BrowserWindow({
+        height: 600,
+        width: 800
+      });
+    
+      win.loadURL(pdf);
     }
   </script>
 </body>

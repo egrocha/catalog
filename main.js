@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+const PDFWindow = require('electron-pdf-window')
 
 function createWindow () {
   // Create the browser window.
@@ -9,6 +10,13 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+
+  //const win2 = new PDFWindow({
+  //  width: 800,
+  //  height: 600
+  //})
+
+  //win2.loadURL('http://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf')
 
   // and load the index.html of the app.
   win.loadFile('index.html')

@@ -24,6 +24,7 @@ h1{
 }
 
 .right-content{
+  text-align: center;
   float: right;
   width: 66%;
   background-color: rgb(255, 255, 255);
@@ -127,6 +128,17 @@ h1{
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+.centered{
+  display: none;
+  top: 50%;
+  left: 50%;
+}
+
+.open-pdf{
+  display: block;
+  text-align: center;
 }
 
 .nav-button-2 {

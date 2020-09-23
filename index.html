@@ -84,7 +84,7 @@
           for(var value3 of Object.entries(children)){
             key3 = value3[1].key;
             //the apostrophes around value3.src are necessary to add strings to onclick
-            tag = '<button onclick=\"toggleImage(\''+value3[1].src+'\')\" id=\'item'+key3+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3[1].name+'</button>';
+            tag = '<button onclick=\"toggleImage('+key+','+key2+','+key3+')\" id=\'item'+key3+'\' type=\"button\" class=\"item '+key+''+key2+'\">'+value3[1].name+'</button>';
             regionDiv.insertAdjacentHTML( 'beforeend', tag);
           }
         }
@@ -142,13 +142,6 @@
                 }
                 else{
                   button.style.display = "block";
-                  try{
-                    //TODO: adicionar pdfs ao ficheiro json
-                    pdf = value3[1].pdf;
-                  }
-                  catch{
-                    pdf = "";
-                  }
                 }
               }
             }
@@ -157,10 +150,29 @@
       }
     }
 
-    function toggleImage(src){
+    function toggleImage(key, key2, key3){
+      for(var value of data.values()){
+        if(value.key == key){
+          for(var value2 of value.children.values()){
+            if(value2.key == key2){
+              for(var value3 of value2.children.values()){
+                if(value3.key == key3){
+                  src = value3.src;
+                  try{
+                    pdf = value3.pdf;
+                  }
+                  catch{
+                    pdf = "";
+                  }
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
       var div = document.getElementById("centered");
       div.style.display = "block";
-      console.log(div.style.visibility)
       var image = document.getElementById("item-image");
       image.src = 'Cena de Vinhos/' + src;
     }
@@ -172,8 +184,9 @@
         height: 600,
         width: 800
       });
-    
-      win.loadURL(pdf);
+      
+      pdf_url = '/Cena de Vinhos/' + pdf;
+      win.loadURL('file://' + __dirname + pdf_url);
     }
   </script>
 </body>
